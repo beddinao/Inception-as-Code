@@ -2,8 +2,6 @@
   hosts: cloud
   become: true
   roles:
-    - role: common
-      tags: [common]
     - role: docker
       tags: [docker]
     - role: firewall
