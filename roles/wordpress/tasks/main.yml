@@ -1,0 +1,21 @@
+- name: Start wordpress service
+  community.docker.docker_compose_v2:
+    project_src: /srcs
+    services:
+      - wordpress
+    state: present
+    dependencies: false
+
+- name: retrieve wordpress container info
+  community.docker.docker_container_info:
+    name: inception_wordpress_fpm
+  register: wordpress_info
+
+- name: check wordpress container healthy
+  ansible.builtin.assert:
+    that:
+      - wordpress_info.exists == true
+      - wordpress_info.container.State.Running == true
+    fail_msg: "failure: wordpress container is down!"
+    success_msg: "success: wordpress container is UP and running!"
+

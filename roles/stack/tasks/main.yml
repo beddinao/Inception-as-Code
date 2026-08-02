@@ -1,0 +1,10 @@
+- name: Copy source files
+  ansible.builtin.copy:
+    src: srcs
+    dest: /
+
+- name: Render env file
+  ansible.builtin.template:
+    src: env.j2
+    dest: /srcs/.env
+    mode: "0600"

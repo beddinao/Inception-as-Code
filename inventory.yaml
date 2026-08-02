@@ -1,0 +1,11 @@
+cloud:
+  hosts:
+    droplet_1:
+      ansible_host: 64.225.105.5
+      ansible_user: root
+      ansible_ssh_private_key_file: ~/.ssh/cloud1_droplet.priv
+    droplet_2:
+      ansible_host: 207.154.193.245
+      ansible_user: root
+      ansible_ssh_private_key_file: ~/.ssh/cloud1_droplet.priv
+    

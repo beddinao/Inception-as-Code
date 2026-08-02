@@ -1,0 +1,20 @@
+- name: Start nginx service
+  community.docker.docker_compose_v2:
+    project_src: /srcs
+    services:
+      - nginx
+    state: present
+    dependencies: false
+
+- name: retrieve nginx container info 
+  community.docker.docker_container_info:
+    name: inception_nginx
+  register: nginx_info
+
+- name: verifying nginx is healthy
+  ansible.builtin.assert:
+    that:
+      - nginx_info.exists == true
+      - nginx_info.container.State.Running == true 
+    fail_msg: "failure: nginx is down!"
+    success_msg: "success: nginx is UP and running!"

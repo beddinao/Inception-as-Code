@@ -1,0 +1,7 @@
+- name: Start phpmyadmin service
+  community.docker.docker_compose_v2:
+    project_src: /srcs
+    services:
+      - pma
+    state: present
+    dependencies: false

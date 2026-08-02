@@ -1,0 +1,20 @@
+- name: Start database service
+  community.docker.docker_compose_v2:
+    project_src: /srcs
+    services:
+      - mariadb
+    state: present
+
+- name: retrieve mariadb container info
+  community.docker.docker_container_info:
+    name: inception_mariadb
+  register: mariadb_info
+
+
+- name: verifying mariadb is healthy
+  ansible.builtin.assert:
+    that:
+      - mariadb_info.exists == true
+      - mariadb_info.container.State.Running == true
+    fail_msg: "failure: mariadb is down!"
+    success_msg: "success: mariadb is UP and running!"

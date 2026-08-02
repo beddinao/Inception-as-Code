@@ -1,0 +1,20 @@
+- name: Deploy Inception stack on cloud hosts
+  hosts: cloud
+  become: true
+  roles:
+    - role: common
+      tags: [common]
+    - role: docker
+      tags: [docker]
+    - role: firewall
+      tags: [firewall]
+    - role: stack
+      tags: [always, stack]
+    - role: database
+      tags: [database]
+    - role: wordpress
+      tags: [wordpress]
+    - role: phpmyadmin
+      tags: [phpmyadmin]
+    - role: nginx
+      tags: [nginx]
